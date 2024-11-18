@@ -1,9 +1,17 @@
 {% extends "casos/base.html" %}
 {% load static %}
 {% block content %}
-    <div class="col text-center"><h1>SUR-Gen</h1></div>
+        <div class="col text-center">
+            <span class="text_2">SUR-Gen</span>
+        </div>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{% url 'casos-operador_resultado' caso.victima.id%}">Volver</a></li>
+            </ol>
+          </nav>
+
         </br>
-        <h2>Causa: {{caso}} </h2> 
+        <h2>{{caso}} </h2> 
         </br>
         {% if messages %}
             {% for message in messages %}
@@ -15,9 +23,7 @@
             {% endfor %}
         {% endif %}
 
-        <div class="col-sm text-lg-end">
-            <a href="{% url 'casos-operador_resultado' caso.victima.id%}"> <button type="button" class="btn btn-secondary">Volver</button> </a>
-        </div>
+        
         </br>
         <h4>Concurrencias</h4> 
         </br>

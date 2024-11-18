@@ -2,15 +2,19 @@
 {% block content %}
 <!-- bloque con todos los datos-->
         <!--perfil-->
-        <div class="col text-center"><h1>SUR-Gen</h1></div>
+        <div class="col text-center">
+            <span class="text_2">SUR-Gen</span>
+        </div>
         </br>
         <div class="col-sm text-lg-end">
-            <a href="{% url 'casos-operador_busqueda'%}"> <button type="button" class="btn btn-secondary">Volver</button> </a>
+            <a href="{% url 'casos-operador_busqueda'%}"> <button type="button" class="btn btn-outline-secondary">Volver</button> </a>
         </div>
         </br>
         <h2>{{victima.nombre}} {{victima.apellido}}</h2>
         </br>
-        <small><p> Para hacer cambios o registrar concurrencias entrar a la causa pertinente.</p></small>
+        <div class="alert alert-info" role="alert">
+            Para hacer cambios o registrar concurrencias entrar a la causa pertinente.
+        </div>
         <div class="col-md-8">
             <div class="card mb-4">
             <div class="card-body">

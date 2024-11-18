@@ -72,25 +72,12 @@ class VictimaHistoryAdmin(SimpleHistoryAdmin):
     search_fields = ['documento','nombre','apellido']
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        if db_field.name == "domicilio":
-            try:
-                victimas = Victima.objects.all() 
-                agresores = Agresor.objects.all()
-                domicilios_asignados = []
-                for persona in victimas: #me imagino que hay una mejor forma de hacer y escribir esto pero ahora lo pruebo asi.
-                    domicilios_asignados.append(persona.domicilio.id)
-                for persona in agresores:
-                    domicilios_asignados.append(persona.domicilio.id)
-                kwargs["queryset"] = Domicilio.objects.all().exclude(id__in=domicilios_asignados)
-            except IndexError:
-                pass
-        elif db_field.name == "usuario":
+        if db_field.name == "usuario":
             try:
                 victimas = Victima.objects.all() 
                 usuarios_asignados = []
                 for victima in victimas:
                     usuarios_asignados.append(victima.usuario.id)
-                print(usuarios_asignados)
                 kwargs["queryset"] = MyUser.objects.all().exclude(Q(is_staff = True) | Q(id__in=usuarios_asignados))
             except IndexError:
                 pass
@@ -105,7 +92,8 @@ class AgresorHistoryAdmin(SimpleHistoryAdmin):
     list_display = ["view_nombre","documento", "email", "telefono"]
     history_list_display = ["documento", "email", "telefono"]
     search_fields = ['documento','nombre','apellido']
-    
+    """ 
+
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == "domicilio":
             try:
@@ -120,10 +108,15 @@ class AgresorHistoryAdmin(SimpleHistoryAdmin):
             except IndexError:
                 pass
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
+        
+    """
+    
     
     @admin.display(empty_value='???')
     def view_nombre(self, obj):
         return f"{obj.nombre} {obj.apellido}"
+
+
 
 class ContactoHistoryAdmin(SimpleHistoryAdmin):
     exclude = ('changed_by', )

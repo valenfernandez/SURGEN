@@ -1,32 +1,33 @@
 {% extends "casos/base.html" %}
 {% block content %}
-    <div class="col text-center"><h1>Operador SUR-Gen</h1></div>
-    </br>
-    <!-- boton para registrar usuarios o realizar cambios -> Admin-->
+<div><span class="text_1">Bienvenido, </span></div>
+                    
+<div><span class="text_1">Operador </span><span class="text_2">SUR-Gen</span></div>
+</br>
 
-    <h2>Consultar datos disponibles: </h2>
     <!--Barra de busqueda-->
     
     <form class="d-flex" method="POST" action="{% url 'casos-operador_busqueda' %}" >
         {% csrf_token %}
-        <input class="form-control me-2" type="search" name="searched" placeholder="Buscar Victima"> 
+        <input class="form-control me-2" type="search" name="searched" placeholder="Buscar usuario"> 
         <button class="btn btn-outline-secondary" type="submit"> Buscar </button>
     </form>
     </br>
     {% if victimas %}
     
-            <div class="list-group">
-                {% for victima in victimas %}
-                <li class="list-group-item">
-                    <div class='container-side-by-side'>
-                        <div class="row">
-                            <div class="col-sm"><a href="{% url 'casos-operador_resultado' victima.id %}" class="list-group-item">{{victima.documento}}, {{victima}}</a></div>
-                        </div>
-                    </div>
-                </li>
-                {% endfor %}    
-            </div>
-
+    <div class="list-group"> 
+        {% for victima in victimas %} 
+        <li class="list-group-item"> 
+            <div class="row align-items-center"> 
+                <div class="col-sm"> 
+                    <a href="{% url 'casos-operador_resultado' victima.id %}" class="list-group-item list-group-item-action"> 
+                        <strong>{{victima.documento}}</strong>: {{victima}} 
+                    </a> 
+                </div> 
+            </div> 
+        </li> 
+        {% endfor %}
+    </div>
         
     {% endif %}
 
