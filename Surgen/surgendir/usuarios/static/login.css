@@ -1,0 +1,136 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Space Grotesk', Arial, sans-serif;
+}
+
+/* Background*/
+body {
+    background: linear-gradient(#770077, #DA75DA);
+    overflow: hidden;
+}
+
+/* Center the login container */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Style for the logo section */
+.title-section {
+    color: rgba(255,255,255,1);
+    flex: 1;
+    padding: 20px;
+    text-align: center;
+}
+
+.title-section img {
+    max-width: 100px;
+    height: auto;
+}
+
+.login-section {
+    color: rgba(255,255,255,1);
+    font-family: Inter;
+    flex: 1;
+    padding: 20px;
+    max-width: 400px; /* Set a reasonable maximum width */
+    /* background-color: white;*/
+    border-radius: 15px;
+    /*box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);*/
+}
+
+.white{
+    font-size: 30px;
+    color: rgba(255,255,255,1);
+    font-family: Inter;
+}
+
+.h1{
+    font-family: Inria Sans;
+    font-weight: Bold;
+    font-size: 10px;
+}
+
+.login-section h2 {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 26px;
+    color: #171A21;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #C7F9CC;
+    border-radius: 4px;
+    outline: none;
+}
+
+.forgot-password {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 26px;
+    text-decoration-line: underline;
+    color: #171A21;
+}
+
+.login-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 36px;
+    gap: 8px;
+    background: #171A21;
+    border-radius: 15px;
+}
+
+.login-button-text {
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 31px;
+    color: #C7F9CC;
+}
+
+
+.v3_6 {
+    width: 991px;
+    height: 552px;
+    background: linear-gradient(rgba(119,0,119,1), rgba(119,0,119,1));
+    opacity: 1;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    overflow: hidden;
+  }
+  .v3_18 {
+    width: 386px;
+    color: rgba(255,255,255,1);
+    position: absolute;
+    top: 101px;
+    left: 55px;
+    font-family: Inria Sans;
+    font-weight: Bold;
+    font-size: 64px;
+    opacity: 1;
+    text-align: left;
+  }
+  .v5_28 {
+    width: 558px;
+    color: rgba(255,255,255,1);
+    position: absolute;
+    top: 185px;
+    left: 55px;
+    font-family: Inter;
+    font-weight: Light;
+    font-size: 35px;
+    opacity: 1;
+    text-align: left;
+  }

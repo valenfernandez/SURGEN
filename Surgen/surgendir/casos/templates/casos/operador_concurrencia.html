@@ -1,0 +1,23 @@
+{% extends "casos/base.html" %}
+{% block content %}
+    {% if user.is_authenticated %}
+        <div class="col text-center"><h1>Operador SUR-Gen</h1></div>
+        </br>
+        <div class="col-sm text-lg-end">
+            <a href="{% url 'casos-operador_ver_caso' caso.id %}"> <button type="button" class="btn btn-secondary">Cancelar</button> </a>
+        </div>
+        </br>
+        <h2>{{caso}}</h2>
+        <h4>Registrar nueva concurrencia: </h4>
+        <br/>
+        <form action="" method=POST enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form_concurrencia.as_p }}
+        <br/>
+        <input type="submit" value="Aceptar" class="btn btn-secondary">
+    {% else %}
+        <h1>Sorry! You Must Be Logged In To View This Page...</h1>
+        <a href="{% url 'login' %}">Login Here</a>
+    {% endif %}
+
+{% endblock content %}

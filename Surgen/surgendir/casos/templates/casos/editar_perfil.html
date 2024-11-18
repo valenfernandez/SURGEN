@@ -1,0 +1,33 @@
+{% extends "casos/base.html" %}
+{% block content %}
+
+    {% if user.is_authenticated %}
+        <h1>Editar Perfil:</h1>
+        <br/>
+        <h5>Actualizar datos de contacto:</h5>
+        <br/>
+        <form action="" method=POST enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form_perfil.as_p }}
+            <br/>
+            <h5>Cambiar domicilio:</h5>
+            <br/>
+            {{ form_domicilio.as_p }}
+        <br/>
+        <input type="submit" value="Aceptar" class="btn btn-secondary">
+        <br/>
+        <div class="col-sm text-lg-end">
+            <a href="{% url 'casos-perfil' %}"> <button type="button" class="btn btn-secondary">Cancelar</button> </a>
+        </div>
+        </br>
+    {% else %}
+        <h1>Sorry! You Must Be Logged In To View This Page...</h1>
+        <a href="{% url 'login' %}">Login Here</a>
+    {% endif %}
+
+{% endblock content %} 
+
+
+
+
+	

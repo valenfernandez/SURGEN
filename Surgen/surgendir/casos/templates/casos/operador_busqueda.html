@@ -1,0 +1,33 @@
+{% extends "casos/base.html" %}
+{% block content %}
+    <div class="col text-center"><h1>Operador SUR-Gen</h1></div>
+    </br>
+    <!-- boton para registrar usuarios o realizar cambios -> Admin-->
+
+    <h2>Consultar datos disponibles: </h2>
+    <!--Barra de busqueda-->
+    
+    <form class="d-flex" method="POST" action="{% url 'casos-operador_busqueda' %}" >
+        {% csrf_token %}
+        <input class="form-control me-2" type="search" name="searched" placeholder="Buscar Victima"> 
+        <button class="btn btn-outline-secondary" type="submit"> Buscar </button>
+    </form>
+    </br>
+    {% if victimas %}
+    
+            <div class="list-group">
+                {% for victima in victimas %}
+                <li class="list-group-item">
+                    <div class='container-side-by-side'>
+                        <div class="row">
+                            <div class="col-sm"><a href="{% url 'casos-operador_resultado' victima.id %}" class="list-group-item">{{victima.documento}}, {{victima}}</a></div>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}    
+            </div>
+
+        
+    {% endif %}
+
+{% endblock content %}

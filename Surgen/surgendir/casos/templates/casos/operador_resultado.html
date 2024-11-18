@@ -1,0 +1,110 @@
+{% extends "casos/base.html" %}
+{% block content %}
+<!-- bloque con todos los datos-->
+        <!--perfil-->
+        <div class="col text-center"><h1>SUR-Gen</h1></div>
+        </br>
+        <div class="col-sm text-lg-end">
+            <a href="{% url 'casos-operador_busqueda'%}"> <button type="button" class="btn btn-secondary">Volver</button> </a>
+        </div>
+        </br>
+        <h2>{{victima.nombre}} {{victima.apellido}}</h2>
+        </br>
+        <small><p> Para hacer cambios o registrar concurrencias entrar a la causa pertinente.</p></small>
+        <div class="col-md-8">
+            <div class="card mb-4">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-4">
+                    <h6 class="mb-0">DNI:</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        {{victima.documento}}
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <h6 class="mb-0">Domicilio</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        {{victima.domicilio}}
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <h6 class="mb-0">Email</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        {{victima.email}}
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <h6 class="mb-0">Telefono</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        {{victima.telefono}}
+                    </div>
+                </div>
+            </br>
+                <!--contactos-->
+                <div class="accordion" id="accordionContactos">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="contactos">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                        Contactos de emergencia
+                    </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="contactos" data-bs-parent="#accordionContactos" >
+                        <div class="accordion-body">
+                            {% for contacto in contactos %}
+                                <div class="row">
+                                    {{contacto.nombre}}:         
+                                    <br>
+                                    <div class="col-sm-9 text-secondary">
+                                    Tel: {{contacto.telefono}}
+                                    <br>
+                                    Mail: {{contacto.email}}
+                                    </div>
+                                </div>
+                                <hr>
+                            {% endfor %}
+                        </div>
+                    </div>  
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        <h4> Causas de {{victima.nombre}} {{victima.apellido}}</h4>
+        {% for caso in casos %}
+                    <div class="col-md-8">
+                        <div class="card mb-4">
+                            <div class = "card-body">
+                            <h6 class="mb-0">{{caso}}</h6>
+                                <div class="row-sm-9">
+                                    fecha : {{ caso.fecha }}
+                                </div>
+                                <div class="row-sm-9">
+                                    Estado : {{ caso.get_estado_display }}
+                                </div>    
+                                <div class="col-sm-12">
+                                    <a class="btn btn-dark" href="{% url 'casos-operador_ver_caso' caso.id %}" role="button">Ver</a>
+                                </div>   
+
+                            </div>           
+                        </div>
+                    </div>   
+        {% empty %}
+        <div class="alert alert-primary" role="alert">
+            No hay causas registradas asociadas a este perfil. Para crear una nueva causa acceda al 
+            <a href= "/admin"  target="_blank" >sitio de administracion.</a>
+            
+            <br>
+        </div>
+        <br>
+        {% endfor %}
+{% endblock content %}

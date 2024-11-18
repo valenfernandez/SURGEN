@@ -1,0 +1,49 @@
+{% extends "casos/base.html" %}
+{% block content %}
+<center>
+    <h1>SUR-Gen home</h1>
+    <br>
+    <div class="col-md-8">
+        <div class="card mb-4">
+            <div class = "card-body">
+                {% if user.is_staff  %}
+                
+                    <h4 class="mb-0">Operador SURGEN</h4>     
+                    </br> 
+                    <div class='container-side-by-side' >
+                        <div class="card mb-4">
+                            <div class = "card-body">
+                                <small><p>Buscar victima, subir informacion y realizar cambios</p></small>
+                                <div class="col-sm-12">
+                                    <a class="btn btn-dark" href="/operador_busqueda" role="button">Busqueda</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card mb-4">
+                            <div class = "card-body">
+                                <small><p> Registrar nuevo usuario o nueva causa </p></small>
+                                <div class="col-sm-12">
+                                    <a class="btn btn-dark" href="/admin" role="button">Admin</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    </br> 
+                {% else %}
+                    <h6 class="mb-0">Entra a tu perfil</h6>     
+                    </br> 
+                    <div class="col-sm-12">
+                        <a class="btn btn-dark" href="{% url 'login' %}" role="button">Iniciar sesión</a>
+                    </div>
+                    </br> 
+                    
+                {% endif %}
+            </div>           
+        </div>
+        <hr>
+      </div>
+
+    
+</center>
+{% endblock content %}

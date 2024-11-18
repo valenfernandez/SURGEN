@@ -1,0 +1,11 @@
+{% extends "casos/base.html" %}
+{% block content %}
+<center>
+    <h2>Cerraste sesion</h2>
+    <div class="border-top pt-3">
+        <small class="text-muted">
+            <a href="{% url 'login' %}"><button type="button" class="btn btn-outline-info">Iniciar sesión</button></a>
+        </small>
+    </div>
+</center>
+{% endblock content %}

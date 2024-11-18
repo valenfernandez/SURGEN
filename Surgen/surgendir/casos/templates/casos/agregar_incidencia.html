@@ -1,0 +1,19 @@
+{% extends "casos/base.html" %}
+{% block content %}
+    <div class="col text-center"><h1>Operador SUR-Gen</h1></div>
+    </br>
+    <div class="col-sm text-lg-end">
+        <a href="{% url 'casos-operador_ver_caso' caso.id %}"> <button type="button" class="btn btn-secondary">Cancelar</button> </a>
+    </div>
+    </br>
+    <h2>{{caso}}</h2>
+    <h4>Registrar nuevo tramite judicial: </h4>
+    <br/>
+    <form action="" method=POST enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form_incidencia.as_p }}
+    <br/>
+    <input type="submit" value="Aceptar" class="btn btn-secondary">
+    
+
+{% endblock content %}

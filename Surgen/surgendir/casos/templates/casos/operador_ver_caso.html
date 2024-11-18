@@ -1,0 +1,220 @@
+{% extends "casos/base.html" %}
+{% load static %}
+{% block content %}
+    <div class="col text-center"><h1>SUR-Gen</h1></div>
+        </br>
+        <h2>Causa: {{caso}} </h2> 
+        </br>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-primary" role="alert">
+                    <h6 class="alert-heading"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>  Error</h6>
+                    
+                    {{message}}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <div class="col-sm text-lg-end">
+            <a href="{% url 'casos-operador_resultado' caso.victima.id%}"> <button type="button" class="btn btn-secondary">Volver</button> </a>
+        </div>
+        </br>
+        <h4>Concurrencias</h4> 
+        </br>
+        <p>En esta seccion se debe registrar la concurrencia de una victima a una institucion, y se podran realizar observaciones sobre la misma. </p>
+        <div class="accordion" id="accordionConcurrencias">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="concurrencias">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                    Historial de concurrencias
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="concurrencias" data-bs-parent="#accordionConcurrencias" >
+                    <div class="accordion-body">
+                        {% for concurrencia in concurrencias %}
+                        <div class="card mb-4">
+                            <div class = "card-body">
+                                <h5>{{concurrencia.fecha}}</h5>   
+                                <div class="row-sm-9">
+                                    {{concurrencia.lugar_concurrido}}
+                                </div>  
+                                <div>{{concurrencia.descripcion}}</div>  
+                            </div>           
+                        </div>
+                        {% empty %}
+                        <div class="alert alert-secondary" role="alert">
+                            No hay concurrencias registradas asociadas a este caso.
+                        </div>
+                        <br>
+                        {% endfor %}
+                        {% if concurrencias %}
+                        <div class="col-md-8">
+                            <div class="col-sm-12 text-lg">
+                                <a href=" {% url 'casos-descargar_pdf_concurrencias' caso.id%}"> <button type="button" class="btn btn-primary">Descargar</button> </a>
+                            </div>
+                            <br>
+                        </div>
+                        {%endif%}
+                    </div>
+                </div>
+            </div>
+        </div>
+        </br> 
+        {% if caso.estado == "ABIERTO"%}
+            <div class="col-sm-12 ">
+                <a href="{% url 'casos-operador_concurrencia' caso.id%}"> <button type="button" class="btn btn-primary">Registrar Concurrencia</button> </a>
+            </div>  
+            </br> 
+        {%else%}
+            <div class="col-sm-12 ">
+                <a href="{% url 'casos-operador_concurrencia' caso.id%}"> <button type="button" class="btn btn-outline-secondary disabled">Registrar Concurrencia</button> </a>
+            </div>  
+            </br> 
+        {% endif %}
+        </br> 
+        <!-- Agresor-->
+        <h4>Informacion de agresor</h4> 
+        <div class="col-md-8">
+            <br>
+            {%for agresor in agresores%}
+            <div class="card mb-4">
+                <div class="card-body">
+                <div class="row">
+                    <div class="col-sm">
+                    <h4 class="mb-0"> {{agresor}}</h4>
+                    </div>
+                    <div class="col-sm">
+                    <a href=" {% url 'casos-operador_editar_agresor' caso.id agresor.id %}"> <button type="button" class="btn btn-outline-secondary pull-right" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button> </a>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-4">
+                    <h6 class="mb-0">Relacion con la victima</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                    {{caso.relacion}}
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-4">
+                    <h6 class="mb-0">Hijos en comun</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                    {{caso.hijos_en_comun}}
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-4">
+                    <h6 class="mb-0">DNI</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                    {{agresor.documento}}
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-4">
+                    <h6 class="mb-0">Domicilio</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                    {{agresor.domicilio}}
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-4">
+                    <h6 class="mb-0">Fecha de nacimiento</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                    {{agresor.fecha_nacimiento}}
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-4">
+                    <h6 class="mb-0">Telefono</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                    {{agresor.telefono}}
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-4">
+                    <h6 class="mb-0">Email</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                    {{agresor.email}}
+                    </div>
+                </div>
+                <hr>
+                </div>
+            </div> 
+            {%endfor%}
+        </div>
+        </br>
+        <h4>Historial de tramites judiciales</h4> 
+        <div class="col-md-8">
+            <!-- Historico-->
+            <div class="tab-pane fade show active" id="hist" role="tabpanel" aria-labelledby="hist-tab">
+                <br>
+                <ul class="timeline">
+                    {% for evento in incidencias %} 
+                        <li class="timeline-item mb-5">
+                            <h5>{{evento.nombre}}</h5>
+                            <p class="text-muted mb-2 fw-bold">{{evento.fecha}}</p>
+                            <p>{{evento.descripcion}}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% if caso.estado == "ABIERTO"%}
+                <div class="col-sm-12 ">
+                    <a href=" {% url 'casos-agregar_incidencia' caso.id %}"> <button type="button" class="btn btn-primary">Agregar</button> </a>
+                </div>
+            {%else%}
+                <div class="col-sm-12 ">
+                    <a href=" {% url 'casos-agregar_incidencia' caso.id %}"> <button type="button" class="btn btn-outline-secondary disabled">Agregar</button> </a>
+                </div>
+            {%endif%}
+        </div>
+        </br>
+        </br>
+        <h4>Documentos</h4> 
+        <div class="col-sm-6">
+            <div class="list-group">
+                {% for documento in documentos %}
+                <li class="list-group-item">
+                    <div class='container-side-by-side'>
+                        <div class="row">
+                            <div class="col-sm"><b>{{documento}}</b></div>
+                            <div class="col-sm">
+                                <a href="{% url 'descargar' documento.id %}"> <button type="button" class="btn btn-secondary"><i class="fa fa-download"></i></button> </a>
+                            </div>
+                        </div>
+                    </div>
+                </br>
+                <div class="row">
+                    <div class="col-sm">{{documento.descripcion}}</div>
+                </div>
+                </li>
+                {% endfor %}    
+            </div>
+        </div>
+        </br>
+        {% if caso.estado == "ABIERTO"%}
+            <div class="col-sm-12 ">
+                <a href="{% url 'casos-agregar_documento' caso.id %}"> <button type="button" class="btn btn-primary">Agregar</button> </a>
+            </div> 
+            </br>
+        {%else%}
+            <div class="col-sm-12 ">
+                <a href="{% url 'casos-agregar_documento' caso.id %}"> <button type="button" class="btn btn-outline-secondary disabled">Agregar</button> </a>
+            </div> 
+            </br>
+        {%endif%}
+        </br>
+{% endblock content %}        

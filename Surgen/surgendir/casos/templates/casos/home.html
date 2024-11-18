@@ -1,0 +1,55 @@
+{% extends "casos/base.html" %}
+{% block content %}
+{% if user.is_staff  %}
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+            
+                <div>
+                    
+                    <div><span class="text_1">Bienvenido, </span></div>
+                    
+                    <div><span class="text_1">Operador </span><span class="text_2">SUR-Gen</span></div>
+                </br>
+                </br>
+                    <div><span class="text_3">SUR-Gen es un
+                    sistema unificado de registros de datos de victimas de violencia de género.</span></div>
+                </br>
+                    <div><span class="text_3"> Si no esta familiarizado con nuestro sistema puede descargar el </span> <a class = "text_3" href="/operador_descargar_manual">Manual de Usuario.</a></div>
+                </div>
+
+            </div>
+            <div class="col-sm pd_left">
+            </br>
+            </br>
+            </br>
+            </br>
+
+                <div class="col-sm-12">
+                    <a class="btn btn-custom btn-lg" href="/operador_busqueda" role="button"> <b>Buscar</b> victima y administrar causa</a>
+                </div>
+
+                </br>
+                <div class="col-sm-12">
+                    <a class="btn btn-custom2 btn-lg" href="/admin" role="button"> <b>Registrar </b>nueva victima o causa</a>
+                </div>
+            </br>
+            </br>
+            </br>
+            </br>
+            </div>
+        </div>
+    </div>
+
+    {% else %}
+        <h6 class="mb-0">Entra a tu perfil</h6>     
+        </br> 
+        <div class="col-sm-12">
+            <a class="btn btn-dark" href="{% url 'login' %}" role="button">Iniciar sesión</a>
+        </div>
+        </br> 
+        
+    {% endif %}
+{% endblock content %}

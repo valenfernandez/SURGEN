@@ -1,0 +1,32 @@
+{% extends "casos/base.html" %}
+{% block content %}
+
+    {% if user.is_authenticated %}
+        <div class="col-sm text-lg-end">
+            <a href="{% url 'casos-operador_ver_caso' caso_id %}"> <button type="button" class="btn btn-secondary">Cancelar</button> </a>
+        </div>
+        </br>
+        <h1>Editar Agresor:</h1>
+        <br/>
+        <form action="" method=POST enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form_agresor.as_p }}
+             <!--{{ form_agresor_caso.as_p }}-->
+            {% for field in form_agresor_caso %}
+                <p>
+                <label>{{ field.label }}</label>
+                {{ field }}
+                </p>
+            {% endfor %}
+            <br/>
+            <h5>Cambiar domicilio:</h5>
+            <br/>
+            {{ form_domicilio.as_p }}
+        <br/>
+        <input type="submit" value="Aceptar" class="btn btn-secondary">
+    {% else %}
+        <h1>Sorry! You Must Be Logged In To View This Page...</h1>
+        <a href="{% url 'login' %}">Login Here</a>
+    {% endif %}
+
+{% endblock content %} 

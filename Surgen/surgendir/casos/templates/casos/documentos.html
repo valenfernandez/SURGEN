@@ -1,0 +1,104 @@
+{% extends "casos/base.html" %}
+{% load static %} 
+{% block content %}
+    <div class="col text-center"><h1>SUR-Gen</h1></div>
+    
+    </br>
+    <h2>Documentos de la causa: </h2> 
+    <h3>{{caso}}</h3>
+    <div class="col-sm text-lg-end">
+        <a href="{% url 'casos-caso' caso.id%}"> <button type="button" class="btn btn-secondary">Volver</button> </a>
+    </div>
+    </br>
+    <!-- Documentos-->
+    
+    <div class="row">
+    <div class="col-md-6">
+        <div class="list-group">
+            {% for documento in documentos %}
+            <li class="list-group-item">
+                <div class='container-side-by-side'>
+                    <div class="row">
+                        
+                        {% if documento.mimetype ==  "application/pdf" %}
+                            <div class="col-sm"><a href= {{documento.archivo.url}}  target="_blank" class="list-group-item">{{documento}}</a></div>
+                        {%else%}
+                            <div class="col-sm"><a href="{% url 'casos-documentos' caso.id documento.id%}" class="list-group-item">{{documento}}</a></div>
+                        {%endif%}
+                        <div class="col-sm">
+                            <a href="{% url 'descargar' documento.id %}"> <button type="button" class="btn btn-secondary-outline"><i class="fa fa-download"></i></button> </a>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            {% empty %}
+            <div class="alert alert-secondary" role="alert">
+                No hay documentos asociados a este caso.
+            </div>
+            <br>
+            {% endfor %}    
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card mb-4"> 
+            {% if id_doc == '-1' %}
+            <div class="card mb-4">
+                <div class = "card-body" >
+                    <div class="col text-center">
+                        <p>Seleccionar archivo</p>
+                    </div>
+                </div>
+                </div>
+            {% else %}
+                <div>
+                    
+                    {% if doc_actual.mimetype ==  "text/plain" %}
+                        <div class="card mb-4">
+                        <div class = "card-body" >
+                            <div class="col text-center">
+                                <h3>{{doc_actual}}</h3>
+                            </div>
+                            <div>{{file_content}}</div>
+                        </div>
+                        </div>
+                    {% elif doc_actual.mimetype ==  "image/jpeg" %}
+                    <div class="card mb-4">
+                        <div class = "card-body" >
+                            <div class="col text-center">
+                                <h3>{{doc_actual}}</h3>
+                            </div>
+                            <img src= "{{doc_actual.archivo.url}}" width="440" >
+                        </div>
+                        </div>
+                    {% elif doc_actual.mimetype ==  "application/pdf" %}
+                    <div class="card mb-4">
+                        <div class = "card-body" >
+                            <div class="col text-center">
+                                <h3>{{doc_actual}}</h3>
+                            </div>
+                            <iframe src= {{doc_actual.archivo.url}} width="650"> </iframe>
+                            <a href= {{doc_actual.archivo.url}}  target="_blank" >Abrir</a>
+                        </div>
+                        </div>
+                    
+                    {% else %}
+                        <div class="card mb-4">
+                        <div class = "card-body" >
+                            <div class="col text-center">
+                                <p>No es posible visualizar el documento</p>
+                                <a href="{% url 'descargar' doc_actual.id %}"> <button type="button" class="btn btn-primary">Descargar</button> </a>
+                            </div>
+                        </div>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+            <div class="col text-center">
+                {{doc_actual.descripcion}}
+            </div>
+            <br>
+        </div>
+    </div>
+    </div>
+    
+{% endblock content %}        
