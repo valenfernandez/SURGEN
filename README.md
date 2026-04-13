@@ -70,6 +70,7 @@ Pandas · Seaborn · Matplotlib · Folium · Ubuntu
 > purposes only. / Todos los datos mostrados son ficticios con
 > propósito ilustrativo.
 
+![Database schema](https://github.com/user-attachments/assets/fce714c3-f9f7-403b-a294-dd18c7696510)
 ![LOGIN](https://github.com/user-attachments/assets/c5ae79c6-4710-4b5f-a2cc-4d4014a78e24)
 ![HOME](https://github.com/user-attachments/assets/8c72b803-5d5c-4ddc-9f73-c15510a07713)
 ![Captura de pantalla 2024-11-18 164058](https://github.com/user-attachments/assets/ea159e13-b25e-47b4-8f33-f46abed33c6e)
